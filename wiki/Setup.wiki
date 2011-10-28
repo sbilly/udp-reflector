@@ -2,7 +2,7 @@
 
 = Introduction =
 
-udp_reflector is a tool to support the reflecting of udp traffic on a source port to a mirrored destination port. Data is captured at the data link layer using libpcap. This allows another process to bind to the port, and avoids the error "Bind: Address Already in Use.". udp_reflector supports the use of multiple destination points and ignore ports to prevent the infinite looping of packets between multiple udp_reflectors.
+udp_reflector is a tool to support the reflecting of udp traffic on a source port to a mirrored destination port.  Data is captured at the data link layer using libpcap.  This allows another process to bind to the port, and avoids the error "Bind: Address Already in Use".  udp_reflector supports both multiple packet destinations and multiple ignore ports which are used to prevent the infinite looping of packets between multiple udp_reflectors.
 
 = License =
 
@@ -23,7 +23,7 @@ libpcap development development headers and libraries.
 To Compile:
 g++ -o udp_reflector udp_reflector.cpp -lpcap
 
-= Running =
+= Usage =
 
 Examples:
 
