@@ -40,8 +40,7 @@ Examples:
       destination address 192.168.1.15.  Bind reflector socket to port 50000,
       and ignore UDP packets that originated on ports 25000 and 25001.
 
-      udp_reflector -s lo:3000 -d 192.168.1.10:3100 -d 192.168.1.15:3200 \ 
-         -b 50000 -i 25000 -i 25001
+      udp_reflector -s lo:3000 -d 192.168.1.10:3100 -d 192.168.1.15:3200 -b 50000 -i 25000 -i 25001
 
    2) Bidirectional - two way port forward example (full duplex matched pair).
 
@@ -55,4 +54,5 @@ Examples:
       packets between the udp_reflectors.
 
       udp_reflector -s eth0:3000 -d 192.168.1.255:3200 -b 50001 -i 50002
+
       udp_reflector -s eth0:3200 -d 192.168.1.255:3000 -b 50002 -i 50001
