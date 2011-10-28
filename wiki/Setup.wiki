@@ -20,12 +20,11 @@ libpcap development headers and libraries.
 
 = Compiling =
 
-To Compile:
+To compile:
+
 g++ -o udp_reflector udp_reflector.cpp -lpcap
 
-= Usage =
-
-Examples:
+= Usage Examples =
 
    1) <b>Unidirectional</b> - one way port forward examples (half duplex singleton).
 
