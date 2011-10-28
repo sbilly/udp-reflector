@@ -12,11 +12,11 @@ Source code is available from the Subversion repository at the project's
 homepage:
     http://code.google.com/p/udp-reflector/
 
-= Setup =
+= Required software =
 
 The gnu c++ compiler is required.
 
-libpcap development development headers and libraries.
+libpcap development headers and libraries.
 
 = Compiling =
 
