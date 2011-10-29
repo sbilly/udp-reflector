@@ -24,6 +24,15 @@ To compile:
 
 g++ -o udp_reflector udp_reflector.cpp -lpcap
 
+= Program options =
+
+   -s, source network interface and port<br>
+   -d, destination ip address and port<br>
+   -b, bind reflector socket to a specific source port (defaults to non-binding)<br>
+   -i, ignore all UDP trafic originating from a specific source port<br>
+   -v, enable verbose debugging<br>
+   -h, show this help message<br>
+
 = Usage Examples =
 
 1) <b>Unidirectional</b> - one way port forward examples (half duplex singleton).
@@ -53,6 +62,5 @@ g++ -o udp_reflector udp_reflector.cpp -lpcap
       to bind to these destination ports, but prevents the infinite looping of
       packets between the udp_reflectors.
 
-      udp_reflector -s eth0:3000 -d 192.168.1.255:3200 -b 50001 -i 50002
-
+      udp_reflector -s eth0:3000 -d 192.168.1.255:3200 -b 50001 -i 50002<br>
       udp_reflector -s eth0:3200 -d 192.168.1.255:3000 -b 50002 -i 50001
