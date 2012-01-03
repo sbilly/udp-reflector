@@ -18,13 +18,10 @@ homepage: http://code.google.com/p/udp-reflector/
 
 Required software
 -----------------
-The gnu c++ compiler is required.
+The gnu c++ compiler is required for compilation on Linux, along with the 
 libpcap development headers and libraries.
 
-Compiling
----------
-To compile: 
-   g++ udp_reflector.cpp -o udp_reflector -lpcap
+Visual Studio and WinPcap is required for Windows compilation.
 
 Program options
 ---------------
@@ -67,5 +64,4 @@ Usage Examples
 
       udp_reflector -s pcap3:3000 -d 192.168.1.255:3200 -b 50001 -i 50002
       udp_reflector -s pcap5:3200 -d 192.168.1.255:3000 -b 50002 -i 50001
-
 
