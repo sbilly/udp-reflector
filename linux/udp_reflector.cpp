@@ -461,8 +461,8 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    /* Open the session in promiscuous mode */
-    pcap_handle = pcap_open_live(network_dev, BUFSIZ, 1, 1000, errbuf);
+    /* Open the session in promiscuous mode, with 1 ms read buffering/timeout */
+    pcap_handle = pcap_open_live(network_dev, 1536, 1, 1, errbuf);
     if (pcap_handle == NULL)
     {
         fprintf(stderr, "Couldn't open device %s: %s\n", network_dev, errbuf);
