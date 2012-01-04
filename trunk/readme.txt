@@ -19,9 +19,12 @@ homepage: http://code.google.com/p/udp-reflector/
 Required software
 -----------------
 The gnu c++ compiler is required for compilation on Linux, along with the 
-libpcap development headers and libraries.
+libpcap development headers and libraries.  Installation of libpcap is
+required for execution.
 
-Visual Studio and WinPcap is required for Windows compilation.
+Visual Studio 2010 Express is required for compilation on Windows.
+Installation of WinPcap and the Microsoft Visual C++ 2010 Redistributable 
+Package is required for execution. 
 
 Program options
 ---------------
