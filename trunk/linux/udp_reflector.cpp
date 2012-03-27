@@ -57,6 +57,8 @@ struct Network_Device
 
 static int socket_desc = 0;
 static bool verbose_debug = 0;
+static int PCAP_SNAPLEN_MAX = 65535;
+static int max_packet_len = PCAP_SNAPLEN_MAX;
 
 static struct sockaddr_in source_sock_addr;
 static unsigned short source_port = 0;
@@ -462,7 +464,7 @@ int main(int argc, char *argv[])
     }
 
     /* Open the session in promiscuous mode, with 1 ms read buffering/timeout */
-    pcap_handle = pcap_open_live(network_dev, 1536, 1, 1, errbuf);
+    pcap_handle = pcap_open_live(network_dev, max_packet_len, 1, 1, errbuf);
     if (pcap_handle == NULL)
     {
         fprintf(stderr, "Couldn't open device %s: %s\n", network_dev, errbuf);
