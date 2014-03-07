@@ -187,6 +187,13 @@ void create_socket()
         struct hostent *dest_host_info = gethostbyname(
                 destination_points[i].dest_addr);
 
+        if (!dest_host_info)
+        {
+            fprintf(stderr, "gethostbyname(%s) failed\n",
+                   destination_points[i].dest_addr);
+            exit(1);
+        }
+
         destination_points[i].dest_sock_addr.sin_family = AF_INET;
         destination_points[i].dest_sock_addr.sin_port = htons(
                 destination_points[i].dest_port);
