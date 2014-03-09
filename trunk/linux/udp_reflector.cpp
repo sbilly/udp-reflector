@@ -69,6 +69,10 @@ static vector<UDP_Destination> destination_points;
 static vector<unsigned short> ignore_ports;
 static vector<Network_Device> network_devices;
 
+/* Data offset within raw ethernet frame */
+static const int DATA_OFFSET = sizeof(struct ether_header) + 
+   sizeof(struct iphdr) + sizeof(struct udphdr);
+
 void enumerate_devices()
 {
     pcap_if_t *all_devs;
@@ -280,7 +284,8 @@ static void process_packet(u_char *x, const struct pcap_pkthdr *header,
             + sizeof(struct ether_header) + sizeof(struct iphdr));
 
     bool ignore_packet = false;
-
+    int bytes_sent;
+    
     /* Determine if the packet should be ignored */
     for (unsigned j = 0; j < ignore_ports.size(); j++)
     {
@@ -300,17 +305,11 @@ static void process_packet(u_char *x, const struct pcap_pkthdr *header,
     if (ignore_packet)
         return;
 
-    /* Calculate the data offset within raw ethernet frame */
-    int data_offset = sizeof(struct ether_header) + sizeof(struct iphdr)
-            + sizeof(struct udphdr);
-
-    int bytes_sent;
-
     /* Send UDP packet to each destination point */
     for (unsigned i = 0; i < destination_points.size(); i++)
     {
-        bytes_sent = sendto(socket_desc, (const char *) packet + data_offset,
-                header->len - data_offset, 0,
+        bytes_sent = sendto(socket_desc, (const char *) packet + DATA_OFFSET,
+                header->len - DATA_OFFSET, 0,
                 (struct sockaddr *) &destination_points[i].dest_sock_addr,
                 sizeof(destination_points[i].dest_sock_addr));
 
@@ -410,7 +409,7 @@ int main(int argc, char *argv[])
                 }
                 break;
 
-                /* Destination ip address and port */
+            /* Destination ip address and port */
             case 'd':
                 struct UDP_Destination udp_dest;
 
@@ -422,27 +421,28 @@ int main(int argc, char *argv[])
                 destination_points.push_back(udp_dest);
                 break;
 
-                /* bind reflector socket to a specific source port */
+            /* bind reflector socket to a specific source port */
             case 'b':
                 source_bind_port = atoi(&argv[1][3]);
                 break;
 
-                /* ignore all UDP trafic originating from a specific source port */
+            /* ignore all UDP trafic originating from a specific source port */
             case 'i':
                 ignore_ports.push_back(atoi(&argv[1][3]));
                 break;
 
-                /* enable verbose debugging */
+            /* enable verbose debugging */
             case 'v':
                 verbose_debug = true;
                 break;
 
+            /* list network devices */
             case 'l':
                 list_network_devices();
                 exit(0);
                 break;
 
-                /* show this help message */
+            /* show this help message */
             case 'h':
             default:
                 print_usage();
