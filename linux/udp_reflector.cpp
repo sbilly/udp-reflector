@@ -201,7 +201,7 @@ void create_socket()
         destination_points[i].dest_sock_addr.sin_family = AF_INET;
         destination_points[i].dest_sock_addr.sin_port = htons(
                 destination_points[i].dest_port);
-        strncpy((char *) &destination_points[i].dest_sock_addr.sin_addr,
+        memcpy((char *) &destination_points[i].dest_sock_addr.sin_addr,
                 (char *) dest_host_info->h_addr, dest_host_info->h_length);
 
         if (verbose_debug)
